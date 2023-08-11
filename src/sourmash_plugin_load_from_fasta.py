@@ -24,10 +24,11 @@ def lazy_load_screed(location, *args, **kwargs):
     success = False
     try:
         with screed.open(location) as it:
-            _ = next(iter(it))
+            first_record = next(iter(it))
+            name = first_record.name
 
             print('Returning ScreedFileIndex')
-            return ScreedFileIndex(location)
+            return ScreedFileIndex(location, name)
             
     except:
         raise
@@ -35,9 +36,10 @@ def lazy_load_screed(location, *args, **kwargs):
 lazy_load_screed.priority = 90
 
 class ScreedFileIndex(Index):
-    def __init__(self, filename):
+    def __init__(self, filename, name):
         print(f"creating ScreedFileIndex('{filename}')")
         self.filename = filename
+        self.name = name
 
     def __len__(self):
         return 1
@@ -72,6 +74,8 @@ class ScreedFileIndex(Index):
                                    track_abundance=abund)
 
         sig = SourmashSignature.from_params(params)
+        sig.name = self.name
+        sig.filename = self.filename
         
         with screed.open(self.filename) as fp:
             for record in fp:
