@@ -1,54 +1,38 @@
-# sourmash_plugin_xyz: a template for sourmash plugins
+# sourmash_plugin_load_from_fasta
 
-This is a good place to start if you're writing a plugin for
-[sourmash (sourmash-bio/sourmash/)](https://github.com/sourmash-bio/sourmash/).
+**This is an experimental plugin. Do not use for real work :).**
 
-Note: plugins are not yet available in a released version of sourmash.
+This is a sourmash plugin that will directly load a FASTA/FASTQ file as a
+sketch. It does so in a "lazy" manner: the file is not sketched until
+a specific ksize/moltype/scaled is requested.
 
-## Instructions
+For example, the following command is run directly on FASTA files!
+```
+% sourmash search examples/{47,63}.head.fa
 
-You can use this repo as a template repo to create a new plugin!
+select query k=31 automatically.
+loaded query: NC_009665.1 Shewanella baltica... (k=31, DNA)
+Returning ScreedFileIndex.head.fa'...
+creating ScreedFileIndex('examples/63.head.fa')
+--
+loaded 1 total signatures from 1 locations.
+after selecting signatures compatible with search, 1 remain.
 
-See [this set of changes](https://github.com/ctb/sourmash_plugin_template_test1/pull/1) for the minimal diff needed to get a plugin working!
-
-### Building from a template:
-
-First, go to [the GitHub page](https://github.com/sourmash-bio/sourmash_plugin_template) and click "Use this template" to create a new repository.
-
-Clone that repository into your development space.
-
-Then, search for all places where 'xyz' is present, and replace
-'xyz' with the name of your plugin.
-
-Next, edit the code in `src/sourmash_plugin_xyz.py` to implement the plugin
-(you'll probably want to change the name of that file, too.)
-
-Then run `pip install .` to install and test your plugin! You can also
-run `pip install -e .` to install it in editable mode, which is more
-convenient for development.
-
-## Examples
-
-[sourmash_plugin_avro](https://github.com/sourmash-bio/sourmash_plugin_avro)
-and
-[sourmash_plugin_load_urls](https://github.com/sourmash-bio/sourmash_plugin_load_urls)
-are two examples you can follow.
-
-## Template docs for new plugin built from this template.
-
-Delete everything from this line on up and put in your new README ;).
-
-# sourmash_plugin_xyz
+1 matches above threshold 0.080:
+similarity   match
+----------   -----
+ 29.6%       NC_011663.1 Shewanella baltica OS223, complete genome
+```
 
 ## Installation
 
 ```
-pip install sourmash_plugin_xyz
+pip install sourmash_plugin_load_from_fasta
 ```
 
 ## Usage
 
-non-xyz info goes here!
+More info goes here :).
 
 ## Support
 
@@ -56,7 +40,8 @@ We suggest filing issues in [the main sourmash issue tracker](https://github.com
 
 ## Dev docs
 
-`xyz` is developed at https://github.com/sourmash-bio/sourmash_plugin_template.
+`sourmash_plugin_load_from_fasta` is developed at
+https://github.com/ctb/sourmash_plugin_load_from_fasta
 
 ### Generating a release
 
