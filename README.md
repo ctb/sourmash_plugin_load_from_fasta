@@ -24,6 +24,19 @@ similarity   match
  29.6%       NC_011663.1 Shewanella baltica OS223, complete genome
 ```
 
+This means that you can immediately do comparisons with any k-mer
+size, moltype, scaled, etc.
+
+In exchange, the file is sketched each time.
+
+Amusingly, this also lets you replace `sourmash sketch` calls with
+`sig cat`:
+```
+sourmash sig cat examples/47.head.fa -k 12 -o 47.head.zip
+```
+
+(There's no real immediate purpose to this other than to explore the concept!)
+
 ## Installation
 
 ```
